@@ -1,0 +1,28 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>전표</h1>
+  {% if chit_list %}
+  <ul>
+    {% for chit in chit_list %}
+      <li>
+        <a href="{{ chit.get_absolute_url }}"></a> ({{chit}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no books in the library.</p>
+  {% endif %} 
+
+  <h1>{{ question.question_text }}</h1>
+
+  {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+  <form action="/test/" method="post">
+  {% csrf_token %}
+    <input type="radio" name="choice" id="choice{{ chit.id }}" value="{{ choice.id }}">
+    
+    <input type="submit" value="New">
+  </form>
+
+{% endblock %}
